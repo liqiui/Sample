@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <data>
+    <variable
+        name="viewModel"
+        type="com.lql.sample.viewModel.PhotoItemViewModel"/>
+  </data>
+
+  <FrameLayout
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      android:layout_margin="8dp"
+      android:background="@android:color/holo_blue_bright"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="@{() -> viewModel.onClick(viewModel)}">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:fresco="http://schemas.android.com/apk/res-auto"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+      <androidx.appcompat.widget.AppCompatImageView
+          android:id="@+id/image"
+          android:layout_width="240dp"
+          android:layout_height="match_parent"
+          app:layout_constraintLeft_toLeftOf="parent"
+          app:layout_constraintRight_toLeftOf="@+id/info"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"/>
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/info"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintLeft_toRightOf="@id/image"
+          app:layout_constraintRight_toRightOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          android:textSize="24sp"
+          android:singleLine="false"
+          android:layout_margin="16dp"
+          android:text="@{String.format(`ID: %s\n%s\n`, viewModel.photo.id, viewModel.photo.title)}">
+      </androidx.appcompat.widget.AppCompatTextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </FrameLayout>
+
+</layout>
