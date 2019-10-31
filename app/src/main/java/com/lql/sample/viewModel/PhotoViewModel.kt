@@ -1,7 +1,6 @@
 package com.lql.sample.viewModel
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lql.sample.API
@@ -15,9 +14,9 @@ import retrofit2.Response
 class PhotoViewModel(val context: Context?, val user: User?) : ViewModel(){
 
     var repository = (context as? MainActivity)?.repository ?: API.create()
+    val liveData = MutableLiveData<List<PhotoItemViewModel>>()
 
-    fun get(): LiveData<List<PhotoItemViewModel>> {
-        val liveData = MutableLiveData<List<PhotoItemViewModel>>()
+    fun get() {
         repository.photos(user?.id).enqueue(object: Callback<List<Photo>> {
             override fun onResponse(call: Call<List<Photo>>, response: Response<List<Photo>>) {
                 if (response.isSuccessful) {
@@ -29,6 +28,5 @@ class PhotoViewModel(val context: Context?, val user: User?) : ViewModel(){
                 t.printStackTrace()
             }
         })
-        return liveData
     }
 }

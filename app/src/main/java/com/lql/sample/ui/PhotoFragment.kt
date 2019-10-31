@@ -27,9 +27,10 @@ class PhotoFragment(val user: User): Fragment() {
         super.onViewCreated(view, savedInstanceState)
         dataBinding.viewModel = viewModel
         list?.run {
-            viewModel.get().observe(viewLifecycleOwner, Observer {
+            viewModel.liveData.observe(viewLifecycleOwner, Observer {
                 adapter = PhotoAdapter(context, viewModel, it)
             })
+            viewModel.get()
         }
     }
 

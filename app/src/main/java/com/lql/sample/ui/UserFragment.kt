@@ -23,9 +23,10 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.list?.run {
-            viewModel.get().observe(viewLifecycleOwner, Observer {
+            viewModel.liveData.observe(viewLifecycleOwner, Observer {
                 adapter = UserAdapter(viewModel, it)
             })
+            viewModel.get()
         }
     }
 
